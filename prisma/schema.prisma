@@ -27,3 +27,10 @@ enum Role {
   ADMIN
   GUEST
 }
+
+model Product {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+}
