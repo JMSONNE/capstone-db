@@ -44,6 +44,21 @@ async function seed() {
                 },
             },
         });
+        console.log(cart1)
+        console.log("Created test cart!")
+
+        // adds product to test cart
+        const cartItem1 = await prisma.cartItem.create({
+            data: {
+                quantity: 1,
+                product: {
+                    connect: { id: product1.id },
+                },
+                cart: {
+                    connect: { id: cart1.id }
+                }
+            }
+        })
 
 
 
