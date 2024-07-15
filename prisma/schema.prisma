@@ -19,29 +19,36 @@ model User {
   password String
   name     String
   email    String @unique
-  cart     Cart[]
+  cart     Cart?
   role     Role   @default(USER)
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  cartItems   CartItem[]
+}
+
+model Cart {
+  id        Int        @id @default(autoincrement())
+  userId    Int        @unique
+  user      User       @relation(fields: [userId], references: [id])
+  cartItems CartItem[]
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  quantity  Int
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+  cartId    Int
+  cart      Cart    @relation(fields: [cartId], references: [id])
 }
 
 enum Role {
   USER
   ADMIN
   GUEST
-}
-
-model Product {
-  id          Int    @id @default(autoincrement())
-  name        String
-  description String
-  price       Float
-  Cart        Cart[]
-  cartId      Int?
-}
-
-model Cart {
-  id        Int     @id @default(autoincrement())
-  userId    Int
-  productId Int
-  products  Product @relation(fields: [productId], references: [id])
-  user      User    @relation(fields: [userId], references: [id])
 }

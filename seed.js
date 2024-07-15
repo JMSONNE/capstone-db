@@ -6,6 +6,7 @@ async function seed() {
     // deletes seeded data
     await prisma.user.deleteMany()
     await prisma.product.deleteMany()
+    await prisma.cart.deleteMany()
 
     try {
         // creates a user 
@@ -34,6 +35,17 @@ async function seed() {
 
         console.log(product1)
         console.log("Added test product(s)!")
+
+        //  creates a cart for the test user
+        const cart1 = await prisma.cart.create({
+            data: {
+                user: {
+                    connect: { id: user1.id },
+                },
+            },
+        });
+
+
 
 
         console.log("Seeded the database!")
