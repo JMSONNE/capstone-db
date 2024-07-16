@@ -20,7 +20,7 @@ model User {
   name     String
   email    String @unique
   cart     Cart?
-  role     Role   @default(USER)
+  role     Role   @default(GUEST)
 }
 
 model Product {
