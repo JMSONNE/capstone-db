@@ -20,7 +20,7 @@ model User {
   name     String
   email    String @unique
   cart     Cart?
-  role     Role   @default(GUEST)
+  role     Role   @default(USER)
 }
 
 model Product {
@@ -50,5 +50,4 @@ model CartItem {
 enum Role {
   USER
   ADMIN
-  GUEST
 }
